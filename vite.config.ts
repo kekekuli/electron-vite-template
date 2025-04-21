@@ -24,7 +24,7 @@ export default defineConfig(({ command }) => {
       electron({
         main: {
           // Shortcut of `build.lib.entry`
-          entry: 'electron/main/index.ts',
+          entry: 'src-electron/main/index.ts',
           onstart(args) {
             if (process.env.VSCODE_DEBUG) {
               console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')
@@ -46,7 +46,7 @@ export default defineConfig(({ command }) => {
         preload: {
           // Shortcut of `build.rollupOptions.input`.
           // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
-          input: 'electron/preload/index.ts',
+          input: 'src-electron/preload/index.ts',
           vite: {
             build: {
               sourcemap: sourcemap ? 'inline' : undefined, // #332
@@ -64,13 +64,13 @@ export default defineConfig(({ command }) => {
         renderer: {},
       }),
     ],
-    server: process.env.VSCODE_DEBUG && (() => {
+    server: process.env.VSCODE_DEBUG ? (() => {
       const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
       return {
         host: url.hostname,
         port: +url.port,
       }
-    })(),
+    })() : undefined,
     clearScreen: false,
   }
 })
