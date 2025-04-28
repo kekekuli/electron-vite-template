@@ -2,9 +2,10 @@ appId: com.electron.app
 productName: electron-app
 directories:
   buildResources: build
-  output: dist/electorn-build
+  output: out
 files:
   - 'dist/**/*'
+  - '!out/**/*'
   - '!**/.vscode/*'
   - '!src/*'
   - '!src-electron/*'
