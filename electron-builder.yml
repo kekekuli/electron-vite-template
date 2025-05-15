@@ -5,6 +5,7 @@ directories:
   output: out
 files:
   - 'dist/**/*'
+  - '!node_modules/**/*'
   - '!out/**/*'
   - '!**/.vscode/*'
   - '!src/*'
