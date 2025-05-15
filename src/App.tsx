@@ -1,5 +1,5 @@
-export default function App() {
-  console.log("Hello, world!");
+export default function App(): React.JSX.Element {
+  console.log('Hello, world!')
 
-  return <div>hello, world</div>;
+  return <div className="bg-primary">Ensure Tailwindcss work</div>
 }

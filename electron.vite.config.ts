@@ -1,8 +1,9 @@
 import { resolve } from 'path'
-import { defineConfig, externalizeDepsPlugin, loadEnv } from 'electron-vite'
+import { defineConfig, ElectronViteConfig, externalizeDepsPlugin, loadEnv } from 'electron-vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
-export default ({ mode }) => {
+export default ({ mode }): ElectronViteConfig => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
   return defineConfig({
     main: {
@@ -29,7 +30,7 @@ export default ({ mode }) => {
           '@renderer': resolve('src')
         }
       },
-      plugins: [react()],
+      plugins: [react(), tailwindcss()],
       build: {
         outDir: 'dist/renderer',
         rollupOptions: {
@@ -38,7 +39,7 @@ export default ({ mode }) => {
       },
       root: resolve(__dirname, 'src'),
       server: {
-        port: process.env.VITE_DEV_SERVER_PORT ? parseInt(process.env.VITE_DEV_SERVER_PORT) : 7777,
+        port: process.env.VITE_DEV_SERVER_PORT ? parseInt(process.env.VITE_DEV_SERVER_PORT) : 7777
       }
     }
   })
